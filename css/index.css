@@ -85,10 +85,27 @@ header{
 	padding-top:13px;
 }
 .show{background:#e4e4e4;}
+/*.pic:hover{background-position:-229px 0 ;}
+.pic1:hover{background-position:-229px -22px ;}
+.video:hover{background-position:-229px -89px ;}
+.word:hover{background-position:-229px -44px ;}
+.bt:hover{background-position:-276px 0 ;}
+.music:hover{background-position:-229px -66px ;}
+.other:hover{background-position:-229px -177px;}*/
 .cont_left li{
 	height:31px;
 	margin-bottom:5px;
 }
+.cont_left li:hover{background:#e4e4e4;}
+.cont_left li:hover .pic{background-position:-229px 0;}
+.cont_left li:hover .pic1{background-position:-229px -22px;}
+.cont_left li:hover .video{background-position:-229px -89px;}
+.cont_left li:hover .word{background-position:-229px -44px;}
+.cont_left li:hover .bt{background-position:-276px 0;}
+.cont_left li:hover .music{background-position:-229px -66px;}
+.cont_left li:hover .other{background-position:-229px -177px;}
+.cont_left li:hover .share{background-position:-232px -132px;}
+.cont_left li:hover .share1{background-position:-234px -153px;}
 .cont_left li a{
 	line-height:30px;
 	color:#333333;
@@ -109,8 +126,9 @@ header{
 	background-position:-209px -132px;
 }
 .myown .share1{
-	background-position:-160px -132px;
+	background-position:-211px -153px;
 }
+.cont_left .myown1:hover,.myown1 li:hover{background:none;}
 .myown1 ul{
 	padding-left:17px;
 }
