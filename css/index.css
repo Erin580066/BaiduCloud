@@ -218,3 +218,11 @@ header{
 	background-position: -48px -61px;
 	margin:11px 0 0 23px;
 }
+#contextmenu{
+	min-width:150px;
+	min-height:100px;
+	position:fixed;
+	border:1px solid #d58512;
+	background:rgba(255,153,0,0.3);
+	/*display:none;*/
+}
