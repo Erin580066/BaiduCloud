@@ -7,3 +7,10 @@ function focusevent(){
 	}
 }
 /////全局右键菜单
+document.oncontextmenu = function(e){
+	showcontextmenu(e,datas.contextmenu.commen);
+	return false;/////阻止默认事件
+};
+document.onclick = hidecontextmenu;
+	
+
