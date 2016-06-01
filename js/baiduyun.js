@@ -12,5 +12,6 @@ document.oncontextmenu = function(e){
 	return false;/////阻止默认事件
 };
 document.onclick = hidecontextmenu;
-	
+//////根据已有文件数据 datas.files来初始化创建文件夹/文件
+refreshdirectory(datas.files);
 

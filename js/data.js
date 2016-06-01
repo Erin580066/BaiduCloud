@@ -6,7 +6,9 @@ var datas = {
 			{
 				name:'创建',
 				exe:function(){
-					createFolder();
+					createFolder({
+						name:'新建文件夹'
+					});
 				}
 			},
 			{
@@ -19,6 +21,13 @@ var datas = {
 				name:'粘贴',
 				exe:function(){
 					alert('粘贴')
+				}
+			},
+			{
+				name:'删除最后一个',
+				exe:function(){
+					datas.files.pop();
+					refreshdirectory(datas.files)
 				}
 			}
 //			,

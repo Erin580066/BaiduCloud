@@ -30,8 +30,17 @@ function createFolder(data){
 	fileImage.className = 'fileImage';
 	var fileName =document.createElement("div");
 	fileName.className = 'fileName';
+	fileName.innerHTML = data.name;
 	fileBox.appendChild(checkbox);
 	fileBox.appendChild(fileImage);
 	fileBox.appendChild(fileName);
 	box.appendChild(fileBox);
+}
+//////刷新当前目录
+function refreshdirectory(data){
+	var box = document.getElementById("box");
+	box.innerHTML = '';
+	for (var i = 0; i < data.length; i++) {
+		createFolder(data[i]);
+	}
 }
