@@ -69,13 +69,30 @@ var datas = {
 	/////文件数据
 	files:[
 		{
+			id:1,
+			pid:0,
 			name:'技术'
+			
 		},
 		{
+			id:2,
+			pid:0,
 			name:'游戏'
 		},
 		{
+			id:3,
+			pid:0,
 			name:'城市'
+		},
+		{
+			id:4,
+			pid:1,
+			name:'前端'
+		},
+		{
+			id:5,
+			pid:1,
+			name:'后端'
 		}
 	]
 }

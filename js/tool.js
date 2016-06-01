@@ -20,10 +20,11 @@ function hidecontextmenu(){
 	contextmenuElement.style.display = 'none';
 }
 //////根据数据创建文件夹
-function createFolder(data){
+function createFolder(data,index){
 	var box = document.getElementById("box");
 	var fileBox =document.createElement("div");
 	fileBox.className = 'fileBox';
+	fileBox.fileId = data.id//////fileId是自定义属性
 	var checkbox =document.createElement("div");
 	checkbox.className = 'checkbox';
 	var fileImage =document.createElement("div");
@@ -31,6 +32,10 @@ function createFolder(data){
 	var fileName =document.createElement("div");
 	fileName.className = 'fileName';
 	fileName.innerHTML = data.name;
+	fileBox.ondblclick = function(){
+//		alert(this.fileId)
+		refreshdirectory(getChildren(this.fileId))
+	}
 	fileBox.appendChild(checkbox);
 	fileBox.appendChild(fileImage);
 	fileBox.appendChild(fileName);
@@ -41,6 +46,6 @@ function refreshdirectory(data){
 	var box = document.getElementById("box");
 	box.innerHTML = '';
 	for (var i = 0; i < data.length; i++) {
-		createFolder(data[i]);
+		createFolder(data[i],i);
 	}
 }
