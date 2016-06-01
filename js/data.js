@@ -6,15 +6,16 @@ var datas = {
 			{
 				name:'创建',
 				exe:function(){
-					createFolder({
+					datas.files.push({
 						name:'新建文件夹'
 					});
+					refreshdirectory(datas.files);
 				}
 			},
 			{
 				name:'刷新',
 				exe:function(){
-					alert('刷新')
+					refreshdirectory(datas.files);
 				}
 			},
 			{
