@@ -6,10 +6,19 @@ var datas = {
 			{
 				name:'创建',
 				exe:function(){
-					datas.files.push({
-						name:'新建文件夹'
-					});
-					refreshdirectory(datas.files);
+					var name = prompt('请输入文件夹名称:')||'新建文件夹';
+					if(name){
+						for (var i = 0; i < datas.files.length; i++) {
+							if(datas.files[i].name == name){
+								alert('该文件夹已经存在了');
+								return;
+							}
+						}
+						datas.files.push({
+							name:name
+						});
+						refreshdirectory(datas.files);
+					}
 				}
 			},
 			{
