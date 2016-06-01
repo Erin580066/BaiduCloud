@@ -48,4 +48,14 @@ function refreshdirectory(data){
 	for (var i = 0; i < data.length; i++) {
 		createFolder(data[i],i);
 	}
+	var folders = box.querySelector('.fileBox');
+	var width = 122;
+	var height = 122;
+	var cells = Math.floor(document.documentElement.clientWidth/width);
+//	alert(cells)
+	for (var i = 0; i < folders.length; i++) {
+		folders[i].style.position = 'absolute';
+		folders[i].style.left = i%cells*width + 'px';
+		folders[i].style.top = Math.floor(i/cells*height);
+	}
 }
