@@ -9,7 +9,8 @@ function focusevent(){
 var zIndex = 1;
 
 window.onload = function() {
-    document.oncontextmenu = function(e) {
+	var createfileright = document.getElementById("cont_right")
+    createfileright.oncontextmenu = function(e) {
         showContextmenu(e, datas.contextmenu.common);
         return false;
     }

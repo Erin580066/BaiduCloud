@@ -243,6 +243,17 @@ header{
 	border:1px solid #d2d2d2;
 	line-height:41px;
 }
+.check{
+	width:12px;
+	height:12px;
+	border:1px solid #cacaca;
+	background:#fff;
+	margin:14px 11px 13px 11px;
+}
+.R_cont{
+	width:800px;
+	height:400px;
+}
 #contextmenu {
     min-width: 100px;
     position: fixed;
