@@ -1,5 +1,7 @@
+body{min-width:800px;}
 header{
 	height:50px;
+	min-width:1267px;
 	background:#252525;
 	box-shadow: 6px 6px 6px #707070;
 }
@@ -176,7 +178,22 @@ header{
 .other{background-position:-206px -177px ;}	
 .cont_right{
 	height:617px;
+	min-width:800px;
 	margin-left:211px;
+}
+.cont_right .module_history_list{
+	height:30px;
+	position:relative;
+}
+.module_history_list .history_list_dir{
+	position:absolute;
+	left:20px;
+	top:10px;
+}
+.module_history_list .history_list_tip{
+	position:absolute;
+	right:20px;
+	top:10px;
 }
 .R_top{
 	width:100%;
@@ -218,6 +235,14 @@ header{
 	background-position: -48px -61px;
 	margin:11px 0 0 23px;
 }
+/*右边第二层*/
+.list_view_header{
+	margin-left:20px;
+	height:41px;
+	background:#f7f7f7;
+	border:1px solid #d2d2d2;
+	line-height:41px;
+}
 #contextmenu {
     min-width: 100px;
     position: fixed;
@@ -234,14 +259,14 @@ header{
 #contextmenu li:hover {
     background: white;
 }
-
+#box{position: relative;}
 #box .fileBox {
     padding: 20px;
     width: 70px;
     height: 70px;
     border: 1px solid #fff;
     float: left;
-    position: relative;
+    position: fixed;
 }
 .fileBox .fileImage {
     background: url('../img/file.png') 0px -5px no-repeat #ffffff;
@@ -286,3 +311,4 @@ header{
 .fileBox:hover .checkbox, .fileBoxSelected .checkbox {
     display: block;
 }
+
