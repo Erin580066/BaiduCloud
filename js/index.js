@@ -4,7 +4,28 @@
 		datas = data;
 		tools.store("miaov",datas);
 	}
-	
+	function createLi(options){
+		options = options || {};
+		//传进来的对象，某些调用函数的时候，可能只不会传入很多值，只会传入需要的值
+		var defaults = {
+			name:options.name || "新建文件夹",
+			id:options.id || 0
+		};
+		var li = document.createElement("li");
+		var str =   '<div class="icon">'
+							+'<input type="checkbox"  class="checkInput" />'
+						+'</div>'
+						+'<strong>'+defaults.name+'</strong>'
+						+'<div class="clearFix edtor">'
+							+'<input type="text" value="'+defaults.name+'" class="names"  />'
+							+'<input type="button" value="√" class="ok" />'
+							+'<input type="button" value="×" class="cancel" />'
+						+'</div>';
+				;
+		li.innerHTML = str;
+		li.id = defaults.id;
+		return li;
+	}
 	var allSelected = tools.$(".allSelected")[0];///全选按钮 
 	var filesSet = tools.$('.filesSet')[0];
 	var filebox = tools.$('.filebox')[0];
@@ -16,6 +37,22 @@
 	var createFolder = tools.$('.createfile')[0];//创建文件夹按钮
 	var seletedNum = 0;
 	
+	getPidChild(0);
+	function getPidChild(id){
+//		如果files中没有数据，那么就不再生成li
+		if(!data.files){
+			return;
+		}
+		tools.each(data.files,function (item){
+			if( item.pid == id ){
+				var newLi = createLi({
+					name:item.name,
+					id:item.id   //传入id，挂载在生成的li上
+				});
+				filesSet.appendChild(newLi);
+			}
+		});
+	}
 	////生成动态文件夹
 	filesSet.innerHTML = '';
 	for(var i=0;i<data.files.length;i++){
@@ -23,11 +60,14 @@
 		filesSet.appendChild(newLi);
 	}
 	var checkInput = tools.$(".checkInput",filesSet);//每一个按钮
+	var random = new Date().getTime();//创建文件夹的时候随机
 	//创建文件夹
 	tools.addEvent(createFolder,'click',function(){
 		var newLi = createLi();
+		filesSet.appendChild(newLi);
 		
 	})
+	
 	///全选按钮
 	tools.addEvent(allSelected,"click",function (){
 		for (var i = 0; i < icon.length; i++) {
@@ -129,31 +169,5 @@
 		}
 		ev.preventDefault();
 	});	
-	function createLi(options){
-
-		options = options || {};
-
-		//传进来的对象，某些调用函数的时候，可能只不会传入很多值，只会传入需要的值
-
-		var defaults = {
-			name:options.name || "新建文件夹",
-			id:options.id || 0
-		};
-
-		var li = document.createElement("li");
-		var str =   '<div class="icon">'
-							+'<input type="checkbox"  class="checkInput" />'
-						+'</div>'
-						+'<strong>'+defaults.name+'</strong>'
-						+'<div class="clearFix edtor">'
-							+'<input type="text" value="'+defaults.name+'" class="names"  />'
-							+'<input type="button" value="√" class="ok" />'
-							+'<input type="button" value="×" class="cancel" />'
-						+'</div>';
-				;
-		
-		li.innerHTML = str;
-		li.id = defaults.id;
-		return li;
-	}
+	
 })()
