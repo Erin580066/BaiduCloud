@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="../css/public.css" />
 	</head>
 	<body>
+		<!--头部导航部分-->
 		<header class="clearfix">
 			<div class="head_left fl">
 				<h2 class="fl">百度云
@@ -58,6 +59,7 @@
 			</div>
 		</header>
 		<div class="content clearfix">
+			<!--内容左边菜单项-->
 			<div class="fl cont_left">
 				<ul id="list">
 					<li class="show">
@@ -145,6 +147,7 @@
 					</li>
 				</ul>
 			</div>
+			<!--内容右边菜单项-->
 			<div class=" cont_right" id="cont_right">
 				<div class="R_top clearfix">
 					<a href="#" class="fl upload">
@@ -157,34 +160,52 @@
 						<span class="fl" id="createfile">新建文件夹</span>
 					</a>
 				</div>
-				<div class="module_history_list">
-					<span class="history_list_dir">全部文件</span>
-					<span class="history_list_tip">已全部加载，共51个</span>
-				</div>
-				<ul class="list_view_header">
-					<li class="list_head clearfix">
-						<span class="check fl"></span>
-					</li>
+				<!--全部文件加载项-->
+				<ul class="allfiles clearfix">
+					<li class="fl">全部文件</li>
+					<li class="fr">全部加载，共3个</li>
 				</ul>
-				<div class="R_cont" id="R_cont">
-					<ul id="contextmenu"></ul>
-					<div id="box">
-						<!--<div class="fileBox">
-							<div class="checkbox"></div>
-							<div class="fileImage"></div>
-							<div class="fileName">111</div>
-						</div>-->
+				<!--全选按钮功能菜单项-->
+				<section class="cheeckbox clearfix">
+					<input type="checkbox" class="fl allSelected" />
+					<div class="fl otherinfo">
+						<p class="fl selectNum">已选中<span>0</span>个文件夹</p>
+						<a class="fl info_a delectItem" href="javascript:;">删除</a>
+						<a class="fl info_a rename" href="javascript:;">重命名</a>
 					</div>
+				</section>
+				<!--文件夹选项-->
+				<div class="filebox">
+					<ul class="clearFix filesSet">
+						<li>
+							<div class="icon">
+								<input type="checkbox"  class="checkInput" />
+							</div>
+							<strong style="display:block;">123</strong>
+							<div class="clearFix edtor"  style="display:none;">
+								<input type="text" value="123" class="createInputBtn"  />
+								<input type="button" value="√" />
+								<input type="button" value="×" />
+							</div>
+						</li>
+						<li>
+							<div class="icon">
+								<input type="checkbox"  class="checkInput" />
+							</div>
+							<strong style="display:block;">456</strong>
+							<div class="clearFix edtor"  style="display:none;">
+								<input type="text" value="456" class="createInputBtn"  />
+								<input type="button" value="√" />
+								<input type="button" value="×" />
+							</div>
+						</li>
+					</ul>
 				</div>
-				
 			</div>
 		</div>
 		<script src="../js/jquery-2.2.2.min.js"></script>
 		<script src="../js/data.js"></script>
-		<script src="../js/tree.js"></script>
 		<script src="../js/tool.js"></script>
-		<script src="../js/baiduyun.js"></script>
-		<script type="text/javascript">
-		</script>
+		<script src="../js/index.js"></script>
 	</body>
 </html>

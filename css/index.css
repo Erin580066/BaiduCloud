@@ -235,91 +235,107 @@ header{
 	background-position: -48px -61px;
 	margin:11px 0 0 23px;
 }
-/*右边第二层*/
-.list_view_header{
-	margin-left:20px;
-	height:41px;
-	background:#f7f7f7;
+/*右键创建的div的样式*/
+.collision{
+	background:rgba(202,202,202,.5);
+	position:absolute;
+}
+/*--全部文件加载项*/
+.filebox{
+	height:500px;
+	
+}
+.allfiles{
+	height:30px;
+	line-height:30px;
+	padding:0 20px;
+}
+/*全选共能菜单项*/
+.cheeckbox {
+	height: 41px;
+	background: #f7f7f7;
+	border: 1px solid #d2d2d2;
+	width: 98%;
+	margin-left: 20px;
+	overflow: hidden;
+	
+}
+.allSelected{
+	width: 20px;
+	height: 20px;
+	margin: 10px 0 0 20px;
+}
+.otherinfo{
+	display: none;
+}
+.info_a{
+	width: 113px;
+	height: 25px;
+	display: block;
+	padding: 0px 5px;
+	line-height: 25px;
+	border-radius: 2px;
 	border:1px solid #d2d2d2;
-	line-height:41px;
+	margin: 10px 0 0 10px;
+	text-align: center;
 }
-.check{
-	width:12px;
-	height:12px;
-	border:1px solid #cacaca;
-	background:#fff;
-	margin:14px 11px 13px 11px;
+.otherinfo a {
+	margin-top: 7px;
+	color:#000;
 }
-.R_cont{
-	width:800px;
-	height:400px;
+.otherinfo a{
+	float: left;
+	margin: 7px 10px;
 }
-#contextmenu {
-    min-width: 100px;
-    position: fixed;
-    border: 1px solid #d58512;
-    background: rgba(255, 153,0,.3);
-    display: none;
-    list-style: none;
-    z-index: 99999;
+.otherinfo p{
+	margin:0 10px;
+	line-height: 40px;
 }
-#contextmenu li {
-    padding: 5px;
-    cursor: pointer;
+/*文件夹选项*/
+.filesSet li {
+	width: 144px;
+	height: 126px;
+	float:left;
+	text-align: center;
+	font-size: 12px;
 }
-#contextmenu li:hover {
-    background: white;
-}
-#box{position: relative;}
-#box .fileBox {
-    padding: 20px;
-    width: 70px;
-    height: 70px;
-    border: 1px solid #fff;
-    float: left;
-    position: fixed;
-}
-.fileBox .fileImage {
-    background: url('../img/file.png') 0px -5px no-repeat #ffffff;
-    width: 64px;
-    height: 70px;
-}
-.fileBox .checkbox {
-    width: 10px;
-    height: 10px;
-    border: 1px solid #3091f2;
-    background: white;
-    position: absolute;
-    left: 0;
-    top: 0;
-    display: none;
-}
-.fileBox .checkboxed {
-    width: 10px;
-    height: 10px;
-    border: 1px solid #3091f2;
-    background: #3091f2;
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 10px;
-    color: white;
-}
-.fileBox .fileName {
-    text-align: center;
-    font-size: 12px;
+.filesSet li strong{
+	line-height: 30px;
 }
 
-.fileBox:hover, .fileBoxSelected {
-    padding: 20px;
-    width: 70px;
-    height: 70px;
-    background: #e9f3fd;
-    border: solid 1px #c3d8f0;
-    float: left;
-    position: relative;
+.icon {
+	width:90px;
+	height: 92px;
+	margin: 0 auto;
+	background: url(../img/icon.png) no-repeat 16px -77px;
+	/*border: 2px solid #2e80dc;*/
+	border: 2px solid #fff;
+	position: relative;
 }
-.fileBox:hover .checkbox, .fileBoxSelected .checkbox {
-    display: block;
+.icon input{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	left: 0;
+	top:0;
+	display: none;
 }
-
+.edtor {
+	text-align: left;
+	margin: 2px -4px 0 0;
+	display: none;
+}
+.edtor input{
+	float: left;
+}
+.edtor input[type="text"]{
+	width: 82px;
+	height: 22px;
+	border: 2px solid #8eb0e7;
+	padding-left: 3px;
+}
+.edtor input[type="button"]{
+	width: 22px;
+	height: 22px;
+	margin: 2px 3px 0 4px;
+}
