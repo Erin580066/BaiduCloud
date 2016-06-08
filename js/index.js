@@ -36,7 +36,9 @@
 	var span =tools.$('span',selectNum)[0];
 	var createFolder = tools.$('.createfile')[0];//创建文件夹按钮
 	var seletedNum = 0;
-	
+	var allLi = tools.$("li",filesSet);//获取到所有的li
+	var hiddenInput = tools.$(".hiddenInput")[0];//隐藏的input
+	var names = null;
 	getPidChild(0);
 	function getPidChild(id){
 //		如果files中没有数据，那么就不再生成li
@@ -61,10 +63,61 @@
 	}
 	var checkInput = tools.$(".checkInput",filesSet);//每一个按钮
 	var random = new Date().getTime();//创建文件夹的时候随机
+	names = tools.$(".names",newLi)[0];
+	
+	function handleLi(li){
+		var icon = tools.$(".icon",li)[0];
+		var checkInput = tools.$(".checkInput",li)[0];
+		var ok = tools.$(".ok",li)[0];
+		var cancel = tools.$(".cancel",li)[0];
+		var strong = tools.$("strong",li)[0];
+		var edtor = tools.$(".edtor",li)[0];
+		var names = tools.$(".names",li)[0];
+		// √键的绑定事件
+		tools.addEvent(ok,"click",function(ev){
+			strong.style.display = "block";
+			edtor.style.display = "none";
+			strong.innerHTML = names.value;
+			createFolder.isCreateStatus = false;
+			ev.stopPropagation();
+		});
+		// X键的绑定事件
+		tools.addEvent(cancel,"click",function (ev){
+			filesSet.removeChild(li);
+			createFolder.isCreateStatus = false;
+			ev.stopPropagation();
+		});
+		// 鼠标移进去的绑定事件
+		tools.addEvent(li,"mouseenter",function (){
+			if( !createFolder.isCreateStatus ){
+				icon.style.borderColor = "#2e80dc";	
+				checkInput.style.display = "block";	
+			}
+		})
+		// 鼠标离开的绑定事件
+		tools.addEvent(li,"mouseleave",function (){
+			if( !checkInput.checked ){
+				icon.style.borderColor = "#fff";	
+				checkInput.style.display = "none";	
+			}
+		});
+	}
 	//创建文件夹
 	tools.addEvent(createFolder,'click',function(){
+		if( this.isCreateStatus ){
+			names.select();
+			return;
+		};
 		var newLi = createLi();
 		filesSet.appendChild(newLi);
+		names = tools.$(".names",newLi)[0];
+		var strong = tools.$("strong",newLi)[0];
+		var edtor = tools.$(".edtor",newLi)[0];
+		strong.style.display = "none";
+		edtor.style.display = "block";
+		names.select();
+		this.isCreateStatus = true;
+		handleLi(newLi);
 		
 	})
 	
