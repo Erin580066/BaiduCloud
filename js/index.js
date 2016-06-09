@@ -64,7 +64,9 @@
 	var checkInput = tools.$(".checkInput",filesSet);//每一个按钮
 	var random = new Date().getTime();//创建文件夹的时候随机
 	names = tools.$(".names",newLi)[0];
-	
+	tools.each(allLi,function (itemLi){
+		handleLi(itemLi)
+	});
 	function handleLi(li){
 		var icon = tools.$(".icon",li)[0];
 		var checkInput = tools.$(".checkInput",li)[0];
@@ -141,24 +143,27 @@
 	//每个文件夹上的按钮
 	tools.each(checkInput,function(item,index){
 		tools.addEvent(item,'click',function(){
-			if(this.checked){
+			if( this.checked ){
+				//选中的状态
 				allSelected.checked = true;
-				tools.each(checkInput,function(item1){
-					if(!item1.checked){
+				//只要有一个没选中，就不选中
+				tools.each(checkInput,function (input){
+					if( !input.checked ){
 						allSelected.checked = false;
-					}
+					}	
 				});
 				seletedNum++;
+				info.style.display = "block";
+
 			}else{
-				this.parentNode.style.borderColor = '#fff';
-				this.style.display = 'none';
 				allSelected.checked = false;
 				seletedNum--;
-				if(seletedNum==0){
-					info.style.display = 'none';
+				if(seletedNum == 0){
+					info.style.display = "none";
 				}
-			}
+			};
 			span.innerHTML = seletedNum;
+			ev.stopPropagation();
 		})
 	});
 	//碰撞框选
