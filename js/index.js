@@ -40,20 +40,19 @@
 	var hiddenInput = tools.$(".hiddenInput")[0];//隐藏的input
 	var names = null;
 	getPidChild(0);
-	function getPidChild(id){
-//		如果files中没有数据，那么就不再生成li
-		if(!data.files){
-			return;
-		}
-		tools.each(data.files,function (item){
-			if( item.pid == id ){
-				var newLi = createLi({
-					name:item.name,
-					id:item.id   //传入id，挂载在生成的li上
-				});
-				filesSet.appendChild(newLi);
+	function getPidChild(pid){
+		console.log(datas)
+		for (var i = 0; i < datas.files.length; i++) {
+			if(datas.files[i],pid == pid){
+				var li = createLi({
+					name:datas.files[i].name,
+					id:datas.files[i].id
+				})
+				filesSet.appendChild(li);
+				handleLi(li);
 			}
-		});
+		}
+		
 	}
 	////生成动态文件夹
 	filesSet.innerHTML = '';
@@ -104,6 +103,11 @@
 				checkInput.style.display = "none";	
 			}
 		});
+		tools.addEvent(li,'click',function(){
+			filesSet.innerHTML = "";
+			getPidChild(this.id);
+			hiddenInput.value = this.id;
+		})
 	}
 	//新建文件夹
 	tools.addEvent(createFolder,'click',function(){
@@ -233,5 +237,17 @@
 		}
 		ev.preventDefault();
 	});	
+//	function renderNav(navArr,startIndex){
+//		var str = "",startIndex = startIndex || 0;
+//		for( var i = startIndex; i < navArr.length-1; i++ ){
+//			if( i === 0 ){
+//				str += '<a href="javascript:;" index='+i+' currentId='+navArr[navArr.length-2].currentId+' class="nav_level">'+navArr[i].filename+'</a>|'
+//			}else{
+//				str += '<a href="javascript:;" index='+i+' currentId='+navArr[i].currentId+' class="nav_level">'+navArr[i].filename+'</a>>>>'
+//			}
+//		}
+//		str += '<span>'+navArr[navArr.length-1].filename+'</span>'
+//		files_nav.innerHTML = str;
+//	}
 	
 })()
