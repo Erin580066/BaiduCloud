@@ -81,6 +81,7 @@
 			edtor.style.display = "none";
 			strong.innerHTML = names.value;
 			createFolder.isCreateStatus = false;
+			
 			ev.stopPropagation();
 		});
 		// X键的绑定事件
@@ -104,19 +105,24 @@
 			}
 		});
 	}
-	//创建文件夹
+	//新建文件夹
 	tools.addEvent(createFolder,'click',function(){
 		if( this.isCreateStatus ){
 			names.select();
 			return;
 		};
-		var newLi = createLi();
+		var random = new Date().getTime();//根据时间戳来创建文件夹
+		var newLi = createLi(
+			{
+				id:random
+			}
+		);
 		filesSet.appendChild(newLi);
-		names = tools.$(".names",newLi)[0];
+		names = tools.$(".names",newLi)[0];//修改名字的输入框
 		var strong = tools.$("strong",newLi)[0];
 		var edtor = tools.$(".edtor",newLi)[0];
 		strong.style.display = "none";
-		edtor.style.display = "block";
+		edtor.style.display = "block";//新建的时候让输入框显示
 		names.select();
 		this.isCreateStatus = true;
 		handleLi(newLi);
@@ -142,7 +148,7 @@
 	});
 	//每个文件夹上的按钮
 	tools.each(checkInput,function(item,index){
-		tools.addEvent(item,'click',function(){
+		tools.addEvent(item,'click',function(ev){
 			if( this.checked ){
 				//选中的状态
 				allSelected.checked = true;
