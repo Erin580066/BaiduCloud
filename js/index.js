@@ -255,6 +255,57 @@
 			ev.stopPropagation();
 		})
 	});
+	//删除
+	var delectItem = tools.$(".delectItem")[0];
+	var rename = tools.$(".rename")[0];
+	tools.addEvent(delectItem,'click',function(){
+		if(rename.isRename) {
+			names &&　names.select();
+			return;
+		}
+		var selectLiArr = whoSelect();
+
+		tools.each(selectLiArr,function (item){
+			//找到着对应的值，删除掉
+			for( var i = 0; i < datas.files.length; i++ ){
+				if( datas.files[i].id == item.id ){
+					datas.files.splice(i,1);
+					break;
+				};
+			};
+			tools.store("miaov",datas);
+
+			filesSet.removeChild(item);
+		});
+		allSelected.checked = false;
+		info.style.display = "none";
+	});
+	//重命名
+	tools.addEvent(rename,"click",function (){
+
+		if( this.isRename ){
+			names.select();
+			return;
+		}
+		this.isRename = true;
+		var selectLiArr = whoSelect();
+		if( selectLiArr.length === 1 ){
+			//当只有一项选中
+			var icon = tools.$(".icon",selectLiArr[0])[0];
+			var checkInput = tools.$(".checkInput",selectLiArr[0])[0];
+			var ok = tools.$(".ok",selectLiArr[0])[0];
+			var cancel = tools.$(".cancel",selectLiArr[0])[0];
+			var strong = tools.$("strong",selectLiArr[0])[0];
+			var edtor = tools.$(".edtor",selectLiArr[0])[0];
+			var reName_names = tools.$(".names",selectLiArr[0])[0];
+
+			strong.style.display = "none";
+			edtor.style.display = "block";
+			reName_names.select();
+
+			names = reName_names;
+		}
+	})
 	//碰撞框选
 	tools.addEvent(filebox,'mousedown',function(ev){
 		var e = ev || event;
