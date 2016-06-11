@@ -321,10 +321,21 @@
 	var filebox = tools.$(".filebox")[0];
 	//获取所有的li
 	var allLi = tools.$("li",tools.$(".filesSet")[0]);
-
 	tools.addEvent(filebox,'mousedown',function(ev){
 		ev.stopPropagation();
 		if( rename.isRename ) return;
+		var target = ev.target;
+		//事件源目标找到为li
+		if( target = tools.parents(target,"LI") ){
+			var checkInput = tools.$(".checkInput",target)[0];
+			if( checkInput.checked ) return;
+		};
+		var disX = ev.clientX;
+		var disY = ev.clientY;
+		var newDiv = null;
+		
+		
+		
 //		var e = ev || event;
 //		var disX = e.clientX;
 //		var disY = e.clientY;
