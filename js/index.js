@@ -96,7 +96,7 @@
 			}else{
 				datas.files.push({
 					id:li.id,
-					pid:hiddenInput.value,
+//					pid:hiddenInput.value,
 					name:strong.innerHTML
 				})
 				tools.store("miaov",datas);
@@ -132,7 +132,7 @@
 		tools.addEvent(li,'click',function(){
 			filesSet.innerHTML = "";
 			getPidChild(this.id);
-			hiddenInput.value = this.id;
+//			hiddenInput.value = this.id;
 			navArr.push({
 				filename:strong.innerHTML,
 				currentId:this.id
@@ -322,89 +322,144 @@
 	//获取所有的li
 	var allLi = tools.$("li",tools.$(".filesSet")[0]);
 	tools.addEvent(filebox,'mousedown',function(ev){
-		ev.stopPropagation();
-		if( rename.isRename ) return;
-		var target = ev.target;
-		//事件源目标找到为li
-		if( target = tools.parents(target,"LI") ){
-			var checkInput = tools.$(".checkInput",target)[0];
-			if( checkInput.checked ) return;
-		};
-		var disX = ev.clientX;
-		var disY = ev.clientY;
-		var newDiv = null;
-		tools.addEvent(document,"mousemove",moveHandle);
-		tools.addEvent(document,"mouseup",upHandle);
-
-		function upHandle(ev){
-			tools.removeEvent(document,"mousemove",moveHandle);
-			tools.removeEvent(document,"mouseup",upHandle);
-			//移除生成的div
-			if(newDiv) document.body.removeChild(newDiv);
-			if( whoSelect().length === 0 ){
-				allSelected.checked = false;
-				info.style.display = "none";
-			}
-		}
-		
-		
-//		var e = ev || event;
-//		var disX = e.clientX;
-//		var disY = e.clientY;
-//		var oDiv = document.createElement('div');
-//		oDiv.className = 'collision';
-//		document.body.appendChild(oDiv);
-//		tools.addEvent(document,'mousemove',handleMove);
-//		tools.addEvent(document,'mouseup',up);
-//		function handleMove(ev){
-//			var e = ev || event;
-//			if(e.clientX>disX){
-//				oDiv.style.left = disX + 'px';
-//			}else{
-//				oDiv.style.left = e.clientX + 'px';
+//		ev.stopPropagation();
+//		if( rename.isRename ) return;
+//		var target = ev.target;
+//		//事件源目标找到为li
+//		if( target = tools.parents(target,"LI") ){
+//			var checkInput = tools.$(".checkInput",target)[0];
+//			if( checkInput.checked ) return;
+//		};
+//		var disX = ev.clientX;
+//		var disY = ev.clientY;
+//		var newDiv = null;
+//		tools.addEvent(document,"mousemove",moveHandle);
+//		tools.addEvent(document,"mouseup",upHandle);
+//
+//		function upHandle(ev){
+//			tools.removeEvent(document,"mousemove",moveHandle);
+//			tools.removeEvent(document,"mouseup",upHandle);
+//			//移除生成的div
+//			if(newDiv) document.body.removeChild(newDiv);
+//			if( whoSelect().length === 0 ){
+//				allSelected.checked = false;
+//				info.style.display = "none";
 //			}
-//			if(e.clientY>disY){
-//				oDiv.style.top = disY + 'px';
-//			}else{
-//				oDiv.style.top = e.clientY + 'px';
-//			}
-//			oDiv.style.width = Math.abs(e.clientX -disX) + 'px';
-//			oDiv.style.height = Math.abs(e.clientY -disY) + 'px';
-//			seletedNum=0;
-//			for (var i = 0; i < allLi.length; i++) {
-//				if(tools.collisionRect(oDiv,allLi[i])){
-//					icon[i].style.borderColor = '#2e80dc';
-//					checkInput[i].style.display = 'block';
-//					checkInput[i].checked = true;
-//					seletedNum++;
-//				}else{
-//					icon[i].style.borderColor = '#fff';
-//					checkInput[i].style.display = 'none';
-//					checkInput[i].checked = false;
+//		}
+//		function moveHandle(ev){
+//			var w = ev.clientX - disX;
+//			var h = ev.clientY - disY;
+//			//设置一个检测碰撞的范围
+//			if( Math.abs(w)>5 || Math.abs(h) > 5 ){
+//				if(!newDiv){
+//
+//					newDiv = document.createElement("div");
+//					newDiv.className = "collision";
+//					newDiv.style.left = disX + "px";
+//					newDiv.style.top = disY + "px";
+//					document.body.appendChild(newDiv);
 //				}
-//				info.style.display = 'block';
-//			}
-//			if(seletedNum == 0){//鼠标按下没碰上的时候info不显示
-//				info.style.display = 'none';
-//			}
-//			if(seletedNum==allLi.length){
-//				allSelected.checked = true;
+//
+//				var x = w < 0 ? ev.clientX : disX;
+//				var y = h < 0 ? ev.clientY : disY;
+//
+//				newDiv.style.left = x + "px";
+//				newDiv.style.top = y + "px";
+//
+//				//给newDiv设置宽高和left top
+//				newDiv.style.width = Math.abs(w) + "px";
+//				newDiv.style.height = Math.abs(h) + "px";
+//
+//				//循环过程中检测所有的li
+//				tools.each(allLi,function(item,index){
+//					//找到碰撞的li
+//					if( tools.collisionRect(newDiv,item) ){
+//						handleLis(item,true);
+//
+//					}else{
+//						handleLis(item);
+//					}
+//				})
+//			}		
+//		}
+//		function handleLis( li,bl ){
+//			var icon = tools.$(".icon",li)[0];	
+//			var checkInput = tools.$(".checkInput",li)[0];	
+//			if( bl ){
+//				icon.style.borderColor = "#2e80dc";
+//				checkInput.style.display = "block";
+//				checkInput.checked = true;
+//				selectSpan.innerHTML = seletedNum = whoSelect().length;
+//				if( whoSelect().length === allLi.length ){
+//					allSelected.checked = true;
+//				}
+//				info.style.display = "block";
 //			}else{
+//				icon.style.borderColor = "#fff";
+//				checkInput.style.display = "none";
+//				checkInput.checked = false;
+//				selectSpan.innerHTML = seletedNum = whoSelect().length;
 //				allSelected.checked = false;
 //			}
-//			span.innerHTML = seletedNum;
-//		}
-//		function up(){
-//			tools.removeEvent(document,'mousemove',handleMove );
-//			tools.removeEvent(document,'mouseup',up );
-//			if(oDiv){
-//				document.body.removeChild(oDiv);
-//			}
-//			if(seletedNum == 0){
-//				info.style.display = 'none';
-//			}
-//		}
-//		ev.preventDefault();
+//		};
+		
+		var e = ev || event;
+		var disX = e.clientX;
+		var disY = e.clientY;
+		var oDiv = document.createElement('div');
+		oDiv.className = 'collision';
+		document.body.appendChild(oDiv);
+		tools.addEvent(document,'mousemove',handleMove);
+		tools.addEvent(document,'mouseup',up);
+		function handleMove(ev){
+			var e = ev || event;
+			if(e.clientX>disX){
+				oDiv.style.left = disX + 'px';
+			}else{
+				oDiv.style.left = e.clientX + 'px';
+			}
+			if(e.clientY>disY){
+				oDiv.style.top = disY + 'px';
+			}else{
+				oDiv.style.top = e.clientY + 'px';
+			}
+			oDiv.style.width = Math.abs(e.clientX -disX) + 'px';
+			oDiv.style.height = Math.abs(e.clientY -disY) + 'px';
+			seletedNum=0;
+			for (var i = 0; i < allLi.length; i++) {
+				if(tools.collisionRect(oDiv,allLi[i])){
+					icon[i].style.borderColor = '#2e80dc';
+					checkInput[i].style.display = 'block';
+					checkInput[i].checked = true;
+					seletedNum++;
+				}else{
+					icon[i].style.borderColor = '#fff';
+					checkInput[i].style.display = 'none';
+					checkInput[i].checked = false;
+				}
+				info.style.display = 'block';
+			}
+			if(seletedNum == 0){//鼠标按下没碰上的时候info不显示
+				info.style.display = 'none';
+			}
+			if(seletedNum==allLi.length){
+				allSelected.checked = true;
+			}else{
+				allSelected.checked = false;
+			}
+			span.innerHTML = seletedNum;
+		}
+		function up(){
+			tools.removeEvent(document,'mousemove',handleMove );
+			tools.removeEvent(document,'mouseup',up );
+			if(oDiv){
+				document.body.removeChild(oDiv);
+			}
+			if(seletedNum == 0){
+				info.style.display = 'none';
+			}
+		}
+		ev.preventDefault();
 	});	
 	
 })()
