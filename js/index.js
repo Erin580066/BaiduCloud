@@ -333,7 +333,19 @@
 		var disX = ev.clientX;
 		var disY = ev.clientY;
 		var newDiv = null;
-		
+		tools.addEvent(document,"mousemove",moveHandle);
+		tools.addEvent(document,"mouseup",upHandle);
+
+		function upHandle(ev){
+			tools.removeEvent(document,"mousemove",moveHandle);
+			tools.removeEvent(document,"mouseup",upHandle);
+			//移除生成的div
+			if(newDiv) document.body.removeChild(newDiv);
+			if( whoSelect().length === 0 ){
+				allSelected.checked = false;
+				info.style.display = "none";
+			}
+		}
 		
 		
 //		var e = ev || event;
