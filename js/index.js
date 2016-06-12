@@ -1,5 +1,6 @@
  (function(){
 	var datas = tools.store("miaov")
+	
 	if(datas&&!datas.files){
 		datas = data;
 		tools.store("miaov",datas);
@@ -9,6 +10,7 @@
 	var filebox = tools.$('.filebox')[0];
 	var allLi = tools.$("li",filesSet);//filesSet下面的li
 	var hiddenInput = tools.$(".hiddenInput")[0];//隐藏的input
+	
 	var files_nav = tools.$(".files_nav")[0];//导航菜单
 	var info = tools.$('.otherinfo')[0];
 	var selectNum = tools.$('.selectNum')[0];
@@ -19,9 +21,12 @@
 	function getPidChild(pid){
 		for (var i = 0; i < datas.files.length; i++) {
 			if(datas.files[i].pid == pid){
+//				span.innerHTML = '0';
+//				seletedNum=0;
 				var li = createLi({
 					name:datas.files[i].name,
-					id:datas.files[i].id
+					id:datas.files[i].id,
+					pid:datas.files[i].pid
 				})
 				filesSet.appendChild(li);
 				handleLi(li);
@@ -36,18 +41,6 @@
 		}
 	}
 	
-	////生成动态文件夹
-	filesSet.innerHTML = '';
-	for(var i=0;i<data.files.length;i++){
-		var newLi = createLi(data.files[i],true);
-		filesSet.appendChild(newLi);
-	}
-	var checkInput = tools.$(".checkInput",filesSet);//每一个按钮
-	var random = new Date().getTime();//创建文件夹的时候随机
-	names = tools.$(".names",newLi)[0];
-	tools.each(allLi,function (itemLi){
-		handleLi(itemLi)
-	});
 	//新建文件夹
 	tools.addEvent(createFolder,'click',function(){
 		if( this.isCreateStatus ){
@@ -85,6 +78,7 @@
 		var names = tools.$(".names",li)[0];
 		// √键的绑定事件
 		tools.addEvent(ok,"click",function(ev){
+			isRename()
 			strong.style.display = "block";
 			edtor.style.display = "none";
 			strong.innerHTML = names.value;
@@ -96,7 +90,7 @@
 			}else{
 				datas.files.push({
 					id:li.id,
-//					pid:hiddenInput.value,
+					pid:hiddenInput.value,
 					name:strong.innerHTML
 				})
 				tools.store("miaov",datas);
@@ -132,7 +126,7 @@
 		tools.addEvent(li,'click',function(){
 			filesSet.innerHTML = "";
 			getPidChild(this.id);
-//			hiddenInput.value = this.id;
+			hiddenInput.value = this.id;
 			navArr.push({
 				filename:strong.innerHTML,
 				currentId:this.id
@@ -141,7 +135,38 @@
 		});
 		tools.addEvent(names,"click",function (ev){
 			ev.stopPropagation();	
-		})
+		});
+		var checkInput1 = tools.$(".checkInput",filesSet);
+		var num = 0;
+		tools.each(checkInput1,function(item,index){
+			tools.addEvent(item,'click',function(ev){
+				if( this.checked ){
+					num++;
+					//选中的状态
+					allSelected.checked = true;
+					//只要有一个没选中，就不选中
+					tools.each(checkInput1,function (input){
+						if( !input.checked ){
+							allSelected.checked = false;
+						}	
+					});
+					seletedNum = num;
+					info.style.display = "block";
+	
+				}else{
+					num--;
+					console.log(num)
+					allSelected.checked = false;
+					if(num == 0){
+						info.style.display = "none";
+						span.innerHTML = '0';
+					}
+					seletedNum = num;
+				};
+				span.innerHTML = seletedNum;
+				ev.stopPropagation();
+			})
+		});
 	}
 	///导航的处理事件
 	tools.addEvent(files_nav,"click",function (ev){
@@ -163,6 +188,20 @@
 			renderNav(navArr,startIndex);
 		}
 	})
+	//判断是否重命名
+	function isRename(pid,name){
+		var num1 = 0;
+		tools.each(datas.files,function(item,index){
+			if(item.pid==pid&&item.name.indexOf(name)!= -1){
+				num1++
+			}
+		})
+		if(num1 ==0){
+			return name;
+		}else{
+			return name+'('+num1+')';
+		}
+	}
 	//渲染导航
 	function renderNav(navArr,startIndex){
 		var str = "",startIndex = startIndex || 0;
@@ -230,31 +269,31 @@
 		}
 	});
 	//每个文件夹上的按钮
-	tools.each(checkInput,function(item,index){
-		tools.addEvent(item,'click',function(ev){
-			if( this.checked ){
-				//选中的状态
-				allSelected.checked = true;
-				//只要有一个没选中，就不选中
-				tools.each(checkInput,function (input){
-					if( !input.checked ){
-						allSelected.checked = false;
-					}	
-				});
-				seletedNum++;
-				info.style.display = "block";
-
-			}else{
-				allSelected.checked = false;
-				seletedNum--;
-				if(seletedNum == 0){
-					info.style.display = "none";
-				}
-			};
-			span.innerHTML = seletedNum;
-			ev.stopPropagation();
-		})
-	});
+//	tools.each(checkInput,function(item,index){
+//		tools.addEvent(item,'click',function(ev){
+//			if( this.checked ){
+//				//选中的状态
+//				allSelected.checked = true;
+//				//只要有一个没选中，就不选中
+//				tools.each(checkInput,function (input){
+//					if( !input.checked ){
+//						allSelected.checked = false;
+//					}	
+//				});
+//				seletedNum++;
+//				info.style.display = "block";
+//
+//			}else{
+//				allSelected.checked = false;
+//				seletedNum--;
+//				if(seletedNum == 0){
+//					info.style.display = "none";
+//				}
+//			};
+//			span.innerHTML = seletedNum;
+//			ev.stopPropagation();
+//		})
+//	});
 	//获取删除按钮和重命名按钮
 	var delectItem = tools.$(".delectItem")[0];
 	var rename = tools.$(".rename")[0];
@@ -322,86 +361,6 @@
 	//获取所有的li
 	var allLi = tools.$("li",tools.$(".filesSet")[0]);
 	tools.addEvent(filebox,'mousedown',function(ev){
-//		ev.stopPropagation();
-//		if( rename.isRename ) return;
-//		var target = ev.target;
-//		//事件源目标找到为li
-//		if( target = tools.parents(target,"LI") ){
-//			var checkInput = tools.$(".checkInput",target)[0];
-//			if( checkInput.checked ) return;
-//		};
-//		var disX = ev.clientX;
-//		var disY = ev.clientY;
-//		var newDiv = null;
-//		tools.addEvent(document,"mousemove",moveHandle);
-//		tools.addEvent(document,"mouseup",upHandle);
-//
-//		function upHandle(ev){
-//			tools.removeEvent(document,"mousemove",moveHandle);
-//			tools.removeEvent(document,"mouseup",upHandle);
-//			//移除生成的div
-//			if(newDiv) document.body.removeChild(newDiv);
-//			if( whoSelect().length === 0 ){
-//				allSelected.checked = false;
-//				info.style.display = "none";
-//			}
-//		}
-//		function moveHandle(ev){
-//			var w = ev.clientX - disX;
-//			var h = ev.clientY - disY;
-//			//设置一个检测碰撞的范围
-//			if( Math.abs(w)>5 || Math.abs(h) > 5 ){
-//				if(!newDiv){
-//
-//					newDiv = document.createElement("div");
-//					newDiv.className = "collision";
-//					newDiv.style.left = disX + "px";
-//					newDiv.style.top = disY + "px";
-//					document.body.appendChild(newDiv);
-//				}
-//
-//				var x = w < 0 ? ev.clientX : disX;
-//				var y = h < 0 ? ev.clientY : disY;
-//
-//				newDiv.style.left = x + "px";
-//				newDiv.style.top = y + "px";
-//
-//				//给newDiv设置宽高和left top
-//				newDiv.style.width = Math.abs(w) + "px";
-//				newDiv.style.height = Math.abs(h) + "px";
-//
-//				//循环过程中检测所有的li
-//				tools.each(allLi,function(item,index){
-//					//找到碰撞的li
-//					if( tools.collisionRect(newDiv,item) ){
-//						handleLis(item,true);
-//
-//					}else{
-//						handleLis(item);
-//					}
-//				})
-//			}		
-//		}
-//		function handleLis( li,bl ){
-//			var icon = tools.$(".icon",li)[0];	
-//			var checkInput = tools.$(".checkInput",li)[0];	
-//			if( bl ){
-//				icon.style.borderColor = "#2e80dc";
-//				checkInput.style.display = "block";
-//				checkInput.checked = true;
-//				selectSpan.innerHTML = seletedNum = whoSelect().length;
-//				if( whoSelect().length === allLi.length ){
-//					allSelected.checked = true;
-//				}
-//				info.style.display = "block";
-//			}else{
-//				icon.style.borderColor = "#fff";
-//				checkInput.style.display = "none";
-//				checkInput.checked = false;
-//				selectSpan.innerHTML = seletedNum = whoSelect().length;
-//				allSelected.checked = false;
-//			}
-//		};
 		
 		var e = ev || event;
 		var disX = e.clientX;
@@ -463,3 +422,17 @@
 	});	
 	
 })()
+/////数组去重
+var arr3 = [1,2,3,4,5,6,4,3,3]
+//console.log(fnQc(arr3))
+function fnQc(arr){
+	var arr2 = [];
+	var json = {};
+	for (var i = 0; i < arr.length; i++) {
+		if(!json[arr[i]]){
+			arr2.push(arr[i]);
+			json[arr[i]]=1;
+		}
+	}
+	return arr2;
+}
