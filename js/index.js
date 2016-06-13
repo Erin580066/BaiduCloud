@@ -47,6 +47,9 @@
 			names.select();
 			return;
 		};
+		seletedNum = 0;	
+		span.innerHTML = '0';
+		allSelected.checked = false;
 		var random = new Date().getTime();//根据时间戳来创建文件夹
 		var newLi = createLi(
 			{
@@ -131,17 +134,19 @@
 				filename:strong.innerHTML,
 				currentId:this.id
 			});
+			seletedNum=0;//点进去的时候清空
+			span.innerHTML = '0';
 			renderNav(navArr);
 		});
 		tools.addEvent(names,"click",function (ev){
 			ev.stopPropagation();	
 		});
 		var checkInput1 = tools.$(".checkInput",filesSet);
-		var num = 0;
-		tools.each(checkInput1,function(item,index){
-			tools.addEvent(item,'click',function(ev){
+//		var num = 0;
+//		tools.each(checkInput1,function(item,index){
+			tools.addEvent(checkInput,'click',function(ev){
 				if( this.checked ){
-					num++;
+					seletedNum++;
 					//选中的状态
 					allSelected.checked = true;
 					//只要有一个没选中，就不选中
@@ -150,23 +155,24 @@
 							allSelected.checked = false;
 						}	
 					});
-					seletedNum = num;
+//					seletedNum = num;
 					info.style.display = "block";
 	
 				}else{
-					num--;
-					console.log(num)
+					seletedNum--;
+//					console.log(num)
 					allSelected.checked = false;
-					if(num == 0){
+					if(seletedNum == 0){
 						info.style.display = "none";
 						span.innerHTML = '0';
 					}
-					seletedNum = num;
+//					seletedNum = num;
 				};
+				console.log(seletedNum)
 				span.innerHTML = seletedNum;
 				ev.stopPropagation();
 			})
-		});
+//		});
 	}
 	///导航的处理事件
 	tools.addEvent(files_nav,"click",function (ev){
