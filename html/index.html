@@ -5,13 +5,28 @@
 		<title></title>
 	</head>
 	<body>
-		<ul id="ul1">
-			<li></li>
-		</ul>
 		<script>
-			var oUl = document.getElementById("ul1");
-			var first = oUl.firstElementChild || oUl.firstChild;
-			var last = oUl.lastElementChild || oUl.lastChild;
+			//去掉首尾空格的兼容
+			var str = '   abc  d   ';
+			String.prototype.trim = function(){
+				return this.replace(/^\s+|\s+$/g,'')
+			}
+			console.log(str);
+			console.log(str.trim());
+			
+			//forEach的兼容
+			var arr = [1,2,3,4,5];
+			Array.prototype.forEach = function(fn,that){
+				that = that || this;
+				for (var i = 0; i < this.length; i++) {
+					fn.call(that,this[i],i,that);
+				}
+			};
+			arr.forEach(function(elem,i,all){
+//				console.log(elem)//数组每一项
+//				console.log(i)//每一项的下标
+//				console.log(all)//整个数组
+			})
 		</script>
 	</body>
 </html>
