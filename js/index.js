@@ -30,6 +30,7 @@
 				})
 				filesSet.appendChild(li);
 				handleLi(li);
+				
 			}
 		}
 	}
@@ -81,10 +82,10 @@
 		var names = tools.$(".names",li)[0];
 		// √键的绑定事件
 		tools.addEvent(ok,"click",function(ev){
-			isRename()
+			strong.innerHTML = isRename(hiddenInput.value,names.value);
 			strong.style.display = "block";
 			edtor.style.display = "none";
-			strong.innerHTML = names.value;
+//			strong.innerHTML = names.value;
 			createFolder.isCreateStatus = false;
 			if(rename.isRename){
 				var currentItem = getIdItem(li.id);
