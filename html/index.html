@@ -27,6 +27,19 @@
 //				console.log(i)//每一项的下标
 //				console.log(all)//整个数组
 			})
+			//alert(event);
+			/*
+				chrome/ie 都有event
+				
+				ff是没有event
+				
+				在FF下，如果不加window,那么event会为一个变量，如果不设置这个变量，会报错
+			*/
+			document.onclick = function(ev){
+		//		alert(ev)
+				var e = window.event || ev;
+				alert(e);
+			}
 		</script>
 	</body>
 </html>
