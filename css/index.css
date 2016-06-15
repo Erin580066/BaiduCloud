@@ -221,14 +221,14 @@ header{
 	background-position: -83px -85px;
 	margin:5px 6px 0 15px;
 }
-.create span{color:#666666;line-height:26px;}
+.create span{color:#666666;line-height:26px;cursor: pointer;}
 .upload em{
 	width:17px;
 	height:15px;
 	background-position: -83px -69px;
 	margin:5px 15px 0 16px;
 }
-.upload span{color:#fff;line-height:26px;}
+.upload span{color:#fff;line-height:26px;cursor: pointer;}
 .upload .span1{
 	width:7px;
 	height:4px;
@@ -337,4 +337,85 @@ header{
 	width: 22px;
 	height: 22px;
 	margin: 2px 3px 0 4px;
+}
+/*弹出框*/
+.cover{
+	position:fixed;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	/*display:none;*/
+	z-index: 2;
+}
+.option_box{
+	width:520px;
+	height:326px;
+	border:3px solid #999999;
+	position:absolute;
+	left:35%;
+	top:25%;
+}
+.option_box .option_title{
+	height:40px;
+	line-height:40px;
+	background:url(../img/8.png) repeat-x;
+}
+.option_title span{
+	font-size: 16px;
+	font-weight: bold;
+}
+.option_title .select_text{
+	margin:0 437px 0 14px;
+}
+.option_main .file_tree{
+	width:496px;
+	height:200px;
+	margin:12px 0 15px 11px;;
+	border:1px solid #f2f2f2;
+}
+.treeview_footer span{
+	border:1px solid #adacac;
+	border-radius: 2px;
+	background:#eeeeef;
+	padding:10px 50px;
+	cursor:pointer;
+}
+.foot_creat{
+	margin:0 30px 0 10px;
+}
+.treeview_footer .foot_sure{
+	border:1px solid #0e6ecc;
+	background:#008bf5;
+	margin-right:20px;
+}
+.alltreefile{
+	height:32px;
+	line-height:32px;
+	background:#e5f0fb;
+	border-top:1px solid #bbd4ef;
+	border-bottom:1px solid #bbd4ef;
+}
+.treeview .icron3,.treeview .icron5{
+	width:12px;
+	height:12px;
+	margin:11px 6px 0 3px;
+}
+.treeview .icron3{
+	background-position: -46px -205px;
+}
+.treeview .icron5{
+	background-position: -46px -182px;
+}
+.treeview .icron4,.treeview .icron6{
+	width:22px;
+	height:18px;
+	background-position: -1px -227px;
+	margin:10px 5px 0 0;
+}
+.treeview .icron6{
+	background-position: -1px -205px;
+}
+.branchfile{
+	padding-left:18px;
 }

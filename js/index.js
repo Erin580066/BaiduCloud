@@ -10,7 +10,8 @@
 	var filebox = tools.$('.filebox')[0];
 	var allLi = tools.$("li",filesSet);//filesSet下面的li
 	var hiddenInput = tools.$(".hiddenInput")[0];//隐藏的input
-	
+	var loadNum = tools.$('.loadNum')[0];
+	var span1 =tools.$('span',loadNum)[0]
 	var files_nav = tools.$(".files_nav")[0];//导航菜单
 	var info = tools.$('.otherinfo')[0];
 	var selectNum = tools.$('.selectNum')[0];
@@ -18,11 +19,10 @@
 	var createFolder = tools.$('.createfile')[0];//创建文件夹按钮
 	var names = null;
 	getPidChild(0);
+	span1.innerHTML = allLi.length
 	function getPidChild(pid){
 		for (var i = 0; i < datas.files.length; i++) {
 			if(datas.files[i].pid == pid){
-//				span.innerHTML = '0';
-//				seletedNum=0;
 				var li = createLi({
 					name:datas.files[i].name,
 					id:datas.files[i].id,
@@ -30,7 +30,6 @@
 				})
 				filesSet.appendChild(li);
 				handleLi(li);
-				
 			}
 		}
 	}
@@ -69,9 +68,9 @@
 		tools.each(allLi,function(item){//取消掉所有li中的样式
 			cancelStyle(item);
 		})
-		
 	})
 	var navArr = [{filename:'返回上一级'},{filename:'全部文件',currentId:0}];
+	//处理li的事件
 	function handleLi(li){
 		var icon = tools.$(".icon",li)[0];
 		var checkInput = tools.$(".checkInput",li)[0];
@@ -85,7 +84,7 @@
 			strong.innerHTML = isRename(hiddenInput.value,names.value);
 			strong.style.display = "block";
 			edtor.style.display = "none";
-//			strong.innerHTML = names.value;
+			span1.innerHTML = allLi.length
 			createFolder.isCreateStatus = false;
 			if(rename.isRename){
 				var currentItem = getIdItem(li.id);
@@ -142,38 +141,33 @@
 		tools.addEvent(names,"click",function (ev){
 			ev.stopPropagation();	
 		});
+		//每一个input
 		var checkInput1 = tools.$(".checkInput",filesSet);
-//		var num = 0;
-//		tools.each(checkInput1,function(item,index){
-			tools.addEvent(checkInput,'click',function(ev){
-				if( this.checked ){
-					seletedNum++;
-					//选中的状态
-					allSelected.checked = true;
-					//只要有一个没选中，就不选中
-					tools.each(checkInput1,function (input){
-						if( !input.checked ){
-							allSelected.checked = false;
-						}	
-					});
-//					seletedNum = num;
-					info.style.display = "block";
-	
-				}else{
-					seletedNum--;
-//					console.log(num)
-					allSelected.checked = false;
-					if(seletedNum == 0){
-						info.style.display = "none";
-						span.innerHTML = '0';
-					}
-//					seletedNum = num;
-				};
-				console.log(seletedNum)
-				span.innerHTML = seletedNum;
-				ev.stopPropagation();
-			})
-//		});
+		tools.addEvent(checkInput,'click',function(ev){
+			if( this.checked ){
+				seletedNum++;
+				//选中的状态
+				allSelected.checked = true;
+				//只要有一个没选中，就不选中
+				tools.each(checkInput1,function (input){
+					if( !input.checked ){
+						allSelected.checked = false;
+					}	
+				});
+				info.style.display = "block";
+
+			}else{
+				seletedNum--;
+				allSelected.checked = false;
+				if(seletedNum == 0){
+					info.style.display = "none";
+					span.innerHTML = '0';
+				}
+			};
+			console.log(seletedNum)
+			span.innerHTML = seletedNum;
+			ev.stopPropagation();
+		})
 	}
 	///导航的处理事件
 	tools.addEvent(files_nav,"click",function (ev){
@@ -275,32 +269,6 @@
 			span.innerHTML = seletedNum;
 		}
 	});
-	//每个文件夹上的按钮
-//	tools.each(checkInput,function(item,index){
-//		tools.addEvent(item,'click',function(ev){
-//			if( this.checked ){
-//				//选中的状态
-//				allSelected.checked = true;
-//				//只要有一个没选中，就不选中
-//				tools.each(checkInput,function (input){
-//					if( !input.checked ){
-//						allSelected.checked = false;
-//					}	
-//				});
-//				seletedNum++;
-//				info.style.display = "block";
-//
-//			}else{
-//				allSelected.checked = false;
-//				seletedNum--;
-//				if(seletedNum == 0){
-//					info.style.display = "none";
-//				}
-//			};
-//			span.innerHTML = seletedNum;
-//			ev.stopPropagation();
-//		})
-//	});
 	//获取删除按钮和重命名按钮
 	var delectItem = tools.$(".delectItem")[0];
 	var rename = tools.$(".rename")[0];
@@ -311,7 +279,6 @@
 			return;
 		}
 		var selectLiArr = whoSelect();
-
 		tools.each(selectLiArr,function (item){
 			//找到着对应的值，删除掉
 			for( var i = 0; i < datas.files.length; i++ ){
@@ -324,6 +291,7 @@
 
 			filesSet.removeChild(item);
 		});
+		span1.innerHTML = allLi.length
 		allSelected.checked = false;
 		info.style.display = "none";
 	});

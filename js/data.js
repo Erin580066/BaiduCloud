@@ -13,11 +13,16 @@ var data = {
 		},
 		{
 			id:3,
+			pid:0,
+			"name":"我的作品"
+		},
+		{
+			id:4,
 			pid:1,
 			"name":"周杰伦"
 		},
 		{
-			id:4,
+			id:5,
 			pid:3,
 			"name":"发如雪"
 		}
