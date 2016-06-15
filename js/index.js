@@ -327,11 +327,14 @@
 	var foot_cancel = tools.$('.foot_cancel')[0];
 	var dialog_close = tools.$('.dialog_close')[0]//关闭遮罩层
 	var movement = tools.$('.movement')[0]//按钮移动 弹出遮罩层
+	var select_text = tools.$('.select_text')[0];
 	tools.addEvent(movement,'click',function(){
 		cover.style.display = 'block';
+		select_text.innerHTML = '移动到'
 	})
 	tools.addEvent(copy,'click',function(){
 		cover.style.display = 'block';
+		select_text.innerHTML = '复制到'
 	})
 	//X按钮把遮罩层关掉
 	tools.addEvent(dialog_close,'click',function(){
@@ -351,6 +354,59 @@
 		});
 		return arr;
 	};
+	//拖拽的面向对象组件
+	var option_title = tools.$('#option_title');
+	function Drag(id){/////封装一个构造函数
+		this.obj = null;
+		this.disX = 0;
+		this.disY = 0;
+		this.settings = {///////默认参数
+			toDown:function(){},
+			toUp:function(){}
+		};
+	}
+	Drag.prototype.init = function(opt){
+		var _this=this;
+		this.obj = document.getElementById(opt.id)
+		extend(this.settings,opt)
+		this.obj.onmousedown = function(ev){
+			var e = ev || event;
+			_this.down(e);
+			
+			_this.settings.toDown();
+			document.onmousemove = function(ev){
+				var e = ev || event;
+				_this.move(e);
+			}
+			document.onmouseup = function(){
+				_this.up();
+				_this.settings.toUp();
+				
+			}
+			return false;
+		}
+	}
+	Drag.prototype.down = function(e){
+		this.disX = e.clientX - this.obj.parentNode.offsetLeft;
+		this.disY = e.clientY - this.obj.parentNode.offsetTop;
+	}
+	Drag.prototype.move = function(e){
+		this.obj.parentNode.style.left = e.clientX - this.disX +'px';
+		this.obj.parentNode.style.top = e.clientY - this.disY +'px';
+	}
+	Drag.prototype.up = function(e){
+		document.onmousemove = document.onmouseup = null;
+	}
+	function extend(obj1,obj2){
+		for(var attr in obj2){
+			obj1[attr]=obj2[attr];
+		}
+	}
+	var tab1 = new Drag();
+	tab1.init({
+		id:'option_title'
+	});
+	
 
 	//碰撞框选
 	var filebox = tools.$(".filebox")[0];
