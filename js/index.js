@@ -17,6 +17,7 @@
 	var selectNum = tools.$('.selectNum')[0];
 	var span =tools.$('span',selectNum)[0];//统计选中的span
 	var createFolder = tools.$('.createfile')[0];//创建文件夹按钮
+	
 	var names = null;
 	getPidChild(0);
 	span1.innerHTML = allLi.length
@@ -320,6 +321,26 @@
 			names = reName_names;
 		}
 	});
+	//复制按钮弹出遮罩层
+	var copy = tools.$('.copy')[0];//按钮复制  弹出遮罩层
+	var cover = tools.$(".cover")[0];
+	var foot_cancel = tools.$('.foot_cancel')[0];
+	var dialog_close = tools.$('.dialog_close')[0]//关闭遮罩层
+	var movement = tools.$('.movement')[0]//按钮移动 弹出遮罩层
+	tools.addEvent(movement,'click',function(){
+		cover.style.display = 'block';
+	})
+	tools.addEvent(copy,'click',function(){
+		cover.style.display = 'block';
+	})
+	//X按钮把遮罩层关掉
+	tools.addEvent(dialog_close,'click',function(){
+		cover.style.display = 'none';
+	})
+	//点取消时把遮罩层去掉
+	tools.addEvent(foot_cancel,'click',function(){
+		cover.style.display = 'none';
+	})
 	//获取选中的li
 	function whoSelect(){
 		var arr = [];
