@@ -41,7 +41,6 @@
 			}
 		}
 	}
-	
 	//新建文件夹
 	tools.addEvent(createFolder,'click',function(){
 		if( this.isCreateStatus ){
@@ -510,19 +509,7 @@
 		}
 		ev.preventDefault();
 	});	
+	//右键菜单事件
 	
 })()
-/////数组去重
-var arr3 = [1,2,3,4,5,6,4,3,3]
-console.log(fnQc(arr3))
-function fnQc(arr){
-	var arr2 = [];
-	var json = {};
-	for (var i = 0; i < arr.length; i++) {
-		if(!json[arr[i]]){
-			arr2.push(arr[i]);
-			json[arr[i]]=1;
-		}
-	}
-	return arr2;
-}
+
