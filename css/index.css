@@ -262,6 +262,21 @@ header{
 	padding:0 20px;
 	
 }
+/*右键菜单项*/
+#contextmenu{
+	min-width:100px;
+	position:fixed;
+	display:none;
+	border:1px solid #d58512;
+	background:rgba(255,153,0,0.3);
+}
+#contextmenu li{
+	padding:5px;
+	cursor: pointer;
+}
+#contextmenu li:hover{
+	background:#fff;
+}
 /*全选共能菜单项*/
 .cheeckbox {
 	height: 41px;

@@ -450,7 +450,6 @@
 	//获取所有的li
 	var allLi = tools.$("li",tools.$(".filesSet")[0]);
 	tools.addEvent(filebox,'mousedown',function(ev){
-		
 		var e = ev || event;
 		var disX = e.clientX;
 		var disY = e.clientY;
@@ -508,8 +507,18 @@
 			}
 		}
 		ev.preventDefault();
+		return false;
 	});	
 	//右键菜单事件
-	
+	tools.addEvent(filesSet,'contextmenu',function(ev){
+		var e = ev || event;
+		showContextmenu(e,datas.common)
+		ev.preventDefault();
+		return false;
+	});
+	tools.addEvent(document,'click',function(){
+		hideContextmenu();
+		return false;
+	});
 })()
 
